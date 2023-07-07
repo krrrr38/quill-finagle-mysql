@@ -12,11 +12,20 @@ lazy val root = project
     name          := "quill-finagle-mysql",
     organization  := "com.krrrr38",
     versionScheme := Some("early-semver"),
-    homepage      := None,
+    homepage := Some(
+      url("https://github.com/krrrr38/quill-finagle-mysql")
+    ),
     licenses := List(
       ("Apache License 2.0", url("https://www.apache.org/licenses/LICENSE-2.0"))
     ),
-    developers   := Nil,
+    developers := List(
+      Developer(
+        "krrrr38",
+        "Ken Kaizu",
+        "k.kaizu38@gmail.com",
+        url("https://krrrr38.com")
+      )
+    ),
     scalaVersion := scala2Version,
     libraryDependencies ++= Seq(
       "io.getquill"   %% "quill-sql"       % "4.6.1",

@@ -1,4 +1,5 @@
 scala:
+- build.sbt
 - src/**/*
 - project/**/*
 ci:

@@ -28,4 +28,4 @@ When adding `minor` and `major` github pull request label, next version would be
 
 ## License
 
-[License](LICENSE)
+[License](LICENSE.txt)

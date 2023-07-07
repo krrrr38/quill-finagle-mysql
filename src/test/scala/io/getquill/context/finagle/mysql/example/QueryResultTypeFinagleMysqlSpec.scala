@@ -1,7 +1,9 @@
-package io.getquill.context.finagle.mysql
+package io.getquill.context.finagle.mysql.example
 
 import com.twitter.util.{Await, Future}
-import io.getquill.context.sql.base.QueryResultTypeSpec
+import io.getquill.context.finagle.mysql.testContext
+import io.getquill.context.sql.example.QueryResultTypeSpec
+
 import java.util.concurrent.ConcurrentLinkedQueue
 import scala.jdk.CollectionConverters._
 
@@ -10,11 +12,11 @@ class QueryResultTypeFinagleMysqlSpec extends QueryResultTypeSpec {
   val context = testContext
   import testContext._
 
-  def await[T](r: Future[T]) = Await.result(r)
+  def await[T](r: Future[T]): T = Await.result(r)
 
   val insertedProducts = new ConcurrentLinkedQueue[Product]
 
-  override def beforeAll = {
+  override def beforeAll(): Unit = {
     await(testContext.run(deleteAll))
     val rs = await(testContext.run(liftQuery(productEntries).foreach(e => productInsert(e))))
     val inserted = (rs zip productEntries).map { case (r, prod) =>
@@ -24,7 +26,7 @@ class QueryResultTypeFinagleMysqlSpec extends QueryResultTypeSpec {
     ()
   }
 
-  def products = insertedProducts.asScala.toList
+  def products: List[Product] = insertedProducts.asScala.toList
 
   "return list" - {
     "select" in {

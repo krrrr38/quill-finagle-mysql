@@ -4,7 +4,8 @@ import io.getquill.context.Context
 import io.getquill.quat.Quat
 
 /**
- * @see [[https://github.com/zio/zio-quill/blob/bf18ce1add6d0ce0ad4109cdaba2a4bece47f48c/quill-core/src/test/scala/io/getquill/TestEntities.scala]]
+ * @see
+ *   [[https://github.com/zio/zio-quill/blob/bf18ce1add6d0ce0ad4109cdaba2a4bece47f48c/quill-core/src/test/scala/io/getquill/TestEntities.scala]]
  */
 trait TestEntities {
   this: Context[_, _] =>

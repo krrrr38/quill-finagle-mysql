@@ -1,17 +1,17 @@
-package io.getquill.context.finagle.mysql
+package io.getquill.context.finagle.mysql.example
 
-import com.twitter.util.Await
-import com.twitter.util.Future
-import io.getquill.context.sql.base.{Id, ProductSpec}
+import com.twitter.util.{Await, Future}
+import io.getquill.context.finagle.mysql.testContext
+import io.getquill.context.sql.example.{Id, ProductSpec}
 
 class ProductFinagleMysqlSpec extends ProductSpec {
 
   val context = testContext
   import testContext._
 
-  def await[T](r: Future[T]) = Await.result(r)
+  def await[T](r: Future[T]): T = Await.result(r)
 
-  override def beforeAll = {
+  override def beforeAll(): Unit = {
     await(testContext.run(quote(query[Product].delete)))
     ()
   }

@@ -110,7 +110,7 @@ class FinagleMysqlContext[+N <: NamingStrategy](
       extractionTimeZone
     )
 
-  override def close =
+  override def close(): Unit =
     Await.result(
       Future
         .join(
@@ -122,19 +122,19 @@ class FinagleMysqlContext[+N <: NamingStrategy](
 
   private val currentClient = new Local[Client]
 
-  def probe(sql: String) =
+  def probe(sql: String): Try[MysqlResult] =
     Try(Await.result(client(Write).query(sql)))
 
-  def transaction[T](f: => Future[T]) =
+  def transaction[T](f: => Future[T]): Future[T] =
     client(Write).transaction { transactional =>
       currentClient.update(transactional)
-      f.ensure(currentClient.clear)
+      f.ensure(currentClient.clear())
     }
 
-  def transactionWithIsolation[T](isolationLevel: IsolationLevel)(f: => Future[T]) =
+  def transactionWithIsolation[T](isolationLevel: IsolationLevel)(f: => Future[T]): Future[T] =
     client(Write).transactionWithIsolation(isolationLevel) { transactional =>
       currentClient.update(transactional)
-      f.ensure(currentClient.clear)
+      f.ensure(currentClient.clear())
     }
 
   override def performIO[T](io: IO[T, _], transactional: Boolean = false): Result[T] =

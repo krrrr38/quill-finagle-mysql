@@ -1,4 +1,4 @@
-package io.getquill.context.sql.base
+package io.getquill.context.sql.example
 
 import io.getquill.Query
 import io.getquill.context.sql.SqlContext
@@ -9,7 +9,8 @@ import org.scalatest.matchers.must.Matchers
 case class Id(value: Long) extends AnyVal
 
 /**
- * @see [[https://github.com/zio/zio-quill/blob/bf18ce1add6d0ce0ad4109cdaba2a4bece47f48c/quill-sql/src/test/scala/io/getquill/context/sql/ProductSpec.scala]]
+ * @see
+ *   [[https://github.com/zio/zio-quill/blob/bf18ce1add6d0ce0ad4109cdaba2a4bece47f48c/quill-sql/src/test/scala/io/getquill/context/sql/ProductSpec.scala]]
  */
 trait ProductSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
 

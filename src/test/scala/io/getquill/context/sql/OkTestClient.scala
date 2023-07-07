@@ -1,12 +1,11 @@
-package io.getquill.context.finagle.mysql
+package io.getquill.context.sql
 
 import com.twitter.concurrent.AsyncStream
 import com.twitter.finagle.mysql
+import com.twitter.finagle.mysql.{Client, Session, Transactions}
 import com.twitter.util.{Future, Time}
+
 import java.util.concurrent.atomic.AtomicInteger
-import com.twitter.finagle.mysql.Transactions
-import com.twitter.finagle.mysql.Session
-import com.twitter.finagle.mysql.Client
 
 class OkTestClient extends mysql.Client with mysql.Transactions {
   val methodCount = new AtomicInteger

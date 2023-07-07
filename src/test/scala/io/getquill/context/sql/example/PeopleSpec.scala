@@ -1,4 +1,4 @@
-package io.getquill.context.sql.base
+package io.getquill.context.sql.example
 
 import io.getquill.context.sql.SqlContext
 import io.getquill.{Ord, Query, Quoted}
@@ -7,7 +7,8 @@ import org.scalatest.freespec.AnyFreeSpec
 import org.scalatest.matchers.must.Matchers
 
 /**
- * @see [[https://github.com/zio/zio-quill/blob/bf18ce1add6d0ce0ad4109cdaba2a4bece47f48c/quill-sql/src/test/scala/io/getquill/context/sql/base/PeopleSpec.scala]]
+ * @see
+ *   [[https://github.com/zio/zio-quill/blob/bf18ce1add6d0ce0ad4109cdaba2a4bece47f48c/quill-sql/src/test/scala/io/getquill/context/sql/base/PeopleSpec.scala]]
  */
 trait PeopleSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
 
@@ -59,8 +60,8 @@ trait PeopleSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
       u
     }
   }
-  val `Ex 2 param 1` = 30
-  val `Ex 2 param 2` = 40
+  val `Ex 2 param 1`         = 30
+  val `Ex 2 param 2`         = 40
   val `Ex 2 expected result` = List(Person("Cora", 33), Person("Drew", 31))
 
   val satisfies =
@@ -71,10 +72,10 @@ trait PeopleSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
         u
       }
     }
-  val `Ex 3 satisfies` = quote(satisfies((x: Int) => 20 <= x && x < 30))
+  val `Ex 3 satisfies`       = quote(satisfies((x: Int) => 20 <= x && x < 30))
   val `Ex 3 expected result` = List(Person("Edna", 21))
 
-  val `Ex 4 satisfies` = quote(satisfies((x: Int) => x % 2 == 0))
+  val `Ex 4 satisfies`       = quote(satisfies((x: Int) => x % 2 == 0))
   val `Ex 4 expected result` = List(Person("Alex", 60), Person("Fred", 60))
 
   val `Ex 5 compose` = {
@@ -102,8 +103,8 @@ trait PeopleSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
       }
     }
   }
-  val `Ex 5 param 1` = "Drew"
-  val `Ex 5 param 2` = "Bert"
+  val `Ex 5 param 1`         = "Drew"
+  val `Ex 5 param 2`         = "Bert"
   val `Ex 5 expected result` = List(Person("Cora", 33), Person("Drew", 31))
 
   sealed trait Predicate
@@ -120,17 +121,17 @@ trait PeopleSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
 
   def eval(t: Predicate): Quoted[Int => Boolean] =
     t match {
-      case Above(n) => quote((x: Int) => x > lift(n))
-      case Below(n) => quote((x: Int) => x < lift(n))
+      case Above(n)    => quote((x: Int) => x > lift(n))
+      case Below(n)    => quote((x: Int) => x < lift(n))
       case And(t1, t2) => quote((x: Int) => eval(t1)(x) && eval(t2)(x))
-      case Or(t1, t2) => quote((x: Int) => eval(t1)(x) || eval(t2)(x))
-      case Not(t0) => quote((x: Int) => !eval(t0)(x))
+      case Or(t1, t2)  => quote((x: Int) => eval(t1)(x) || eval(t2)(x))
+      case Not(t0)     => quote((x: Int) => !eval(t0)(x))
     }
 
-  val `Ex 6 predicate` = And(Above(30), Below(40))
+  val `Ex 6 predicate`       = And(Above(30), Below(40))
   val `Ex 6 expected result` = List(Person("Cora", 33), Person("Drew", 31))
 
-  val `Ex 7 predicate` = Not(Or(Below(20), Above(30)))
+  val `Ex 7 predicate`       = Not(Or(Below(20), Above(30)))
   val `Ex 7 expected result` = List(Person("Edna", 21))
 
   val `Ex 8 and 9 contains` =
@@ -138,10 +139,10 @@ trait PeopleSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
       query[Person].filter(p => set.contains(p.age))
     }
 
-  val `Ex 8 param` = Set.empty[Int]
+  val `Ex 8 param`           = Set.empty[Int]
   val `Ex 8 expected result` = List.empty[Person]
 
-  val `Ex 9 param` = Set(55, 33)
+  val `Ex 9 param`           = Set(55, 33)
   val `Ex 9 expected result` = List(Person("Bert", 55), Person("Cora", 33))
 
   val `Ex 10 page 1 query` = quote {
@@ -162,7 +163,7 @@ trait PeopleSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
   val `Ex 11 filtered update expected` =
     peopleEntries.map {
       case Person("Bert", age) => Person("Bert", 44)
-      case other => other
+      case other               => other
     }
 
   val `Ex 12 filtered update co-related` = quote {
@@ -176,6 +177,6 @@ trait PeopleSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
   val `Ex 12 filtered update co-related expected` =
     peopleEntries.map {
       case Person("Bert", age) => Person("Bert", 45)
-      case other => other
+      case other               => other
     }
 }

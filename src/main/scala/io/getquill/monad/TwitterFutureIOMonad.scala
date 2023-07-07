@@ -4,7 +4,6 @@ import language.experimental.macros
 import com.twitter.util.Future
 import io.getquill.context.Context
 import com.twitter.util.Try
-import scala.collection.compat._
 import io.getquill.{Query, Action, BatchAction, ActionReturning, Quoted}
 
 trait TwitterFutureIOMonad extends IOMonad {
@@ -29,13 +28,14 @@ trait TwitterFutureIOMonad extends IOMonad {
       case Run(f)     => f()
       case Sequence(in, cbf) =>
         Future
-          .collect(in.iterator.map(performIO(_)).iterator.to(Seq))
-          .map(r => cbf.newBuilder.++=(r).result)
+          .collect(in.iterator.map(performIO(_, transactional)).iterator.to(Seq))
+          .map(r => cbf.newBuilder.++=(r).result())
       case TransformWith(a, fA) =>
-        performIO(a).liftToTry
+        performIO(a, transactional).liftToTry
           .map(_.asScala)
-          .flatMap(v => performIO(fA(v)))
+          .flatMap(v => performIO(fA(v), transactional))
       case Transactional(io) =>
         performIO(io, transactional = true)
+      case e => Future.exception(new IllegalArgumentException(s"Unsupported io ${e}"))
     }
 }

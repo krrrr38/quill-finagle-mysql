@@ -7,7 +7,7 @@ import com.twitter.util.Await
 import io.getquill.util.LoadConfig
 import io.getquill.{FinagleMysqlContext, FinagleMysqlContextConfig, Literal}
 import io.getquill.Query
-import io.getquill.context.sql.base.EncodingSpec
+import io.getquill.context.sql.example.EncodingSpec
 
 import scala.concurrent.duration._
 
@@ -24,13 +24,13 @@ class FinagleMysqlEncodingSpec extends EncodingSpec {
         result <- testContext.run(query[EncodingTestEntity])
       } yield result
 
-    verify(Await.result(r).toList)
+    verify(Await.result(r))
   }
 
   "fails if the column has the wrong type" in {
     Await.result(testContext.run(liftQuery(insertValues).foreach(e => insert(e))))
     case class EncodingTestEntity(v1: Int)
-    val e = intercept[IllegalStateException] {
+    assertThrows[IllegalStateException] {
       Await.result(testContext.run(query[EncodingTestEntity]))
     }
   }
@@ -141,7 +141,7 @@ class FinagleMysqlEncodingSpec extends EncodingSpec {
         new FinagleMysqlContext(Literal, config.client, TimeZone.getTimeZone("KST"), TimeZone.getTimeZone("UTC"))
       import testTimezoneContext._
 
-      val r = for {
+      val _ = for {
         _      <- testTimezoneContext.run(query[DateEncodingTestEntity].delete)
         _      <- testTimezoneContext.run(query[DateEncodingTestEntity].insertValue(lift(entity)))
         result <- testTimezoneContext.run(query[DateEncodingTestEntity])

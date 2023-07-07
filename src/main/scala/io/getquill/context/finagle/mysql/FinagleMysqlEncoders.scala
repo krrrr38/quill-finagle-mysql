@@ -1,13 +1,12 @@
 package io.getquill.context.finagle.mysql
 
+import com.twitter.finagle.mysql.CanBeParameter._
+import com.twitter.finagle.mysql._
+import io.getquill.FinagleMysqlContext
+
 import java.sql.Timestamp
 import java.time.{LocalDate, LocalDateTime}
 import java.util.{Date, UUID}
-
-import com.twitter.finagle.mysql.CanBeParameter._
-import com.twitter.finagle.mysql.Parameter.wrap
-import com.twitter.finagle.mysql._
-import io.getquill.FinagleMysqlContext
 
 trait FinagleMysqlEncoders {
   this: FinagleMysqlContext[_] =>

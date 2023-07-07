@@ -1,17 +1,18 @@
-package io.getquill.context.finagle.mysql
+package io.getquill.context.finagle.mysql.example
 
 import com.twitter.util.{Await, Future}
-import io.getquill.context.sql.base.CaseClassQuerySpec
+import io.getquill.context.finagle.mysql.testContext
+import io.getquill.context.sql.example.CaseClassQuerySpec
 import org.scalatest.matchers.should.Matchers._
 
-class CaseClassQueryFinagleSpec extends CaseClassQuerySpec {
+class CaseClassQueryFinagleMysqlSpec extends CaseClassQuerySpec {
 
   val context = testContext
   import testContext._
 
   def await[T](future: Future[T]) = Await.result(future)
 
-  override def beforeAll =
+  override def beforeAll() =
     await {
       testContext.transaction {
         for {

@@ -1,8 +1,8 @@
-package io.getquill.context.finagle.mysql
+package io.getquill.context.finagle.mysql.example
 
-import com.twitter.util.Await
-import com.twitter.util.Future
-import io.getquill.context.sql.base.DepartmentsSpec
+import com.twitter.util.{Await, Future}
+import io.getquill.context.finagle.mysql.testContext
+import io.getquill.context.sql.example.DepartmentsSpec
 
 class DepartmentsFinagleMysqlSpec extends DepartmentsSpec {
 
@@ -11,7 +11,7 @@ class DepartmentsFinagleMysqlSpec extends DepartmentsSpec {
 
   def await[T](future: Future[T]) = Await.result(future)
 
-  override def beforeAll =
+  override def beforeAll() =
     await {
       testContext.transaction {
         for {

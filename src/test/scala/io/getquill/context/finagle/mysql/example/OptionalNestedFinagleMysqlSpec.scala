@@ -1,16 +1,17 @@
-package io.getquill.context.finagle.mysql
+package io.getquill.context.finagle.mysql.example
 
 import com.twitter.util.{Await, Future}
-import io.getquill.context.sql.base.OptionalNestedSpec
+import io.getquill.context.finagle.mysql.testContext
+import io.getquill.context.sql.example.OptionalNestedSpec
 
-class OptionalProductEncodingFinagleSpec extends OptionalNestedSpec {
+class OptionalNestedFinagleMysqlSpec extends OptionalNestedSpec {
 
   val context: testContext.type = testContext
   import testContext._
 
-  def await[T](future: Future[T]) = Await.result(future)
+  def await[T](future: Future[T]): T = Await.result(future)
 
-  override protected def beforeEach() = {
+  override protected def beforeEach(): Unit = {
     import Setup._
     await(testContext.run(query[Contact].delete))
     ()

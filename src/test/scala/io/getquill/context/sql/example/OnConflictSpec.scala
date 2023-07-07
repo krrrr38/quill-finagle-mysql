@@ -1,4 +1,4 @@
-package io.getquill.context.sql.base
+package io.getquill.context.sql.example
 
 import io.getquill.context.sql.{SqlContext, TestEntities}
 import org.scalatest.BeforeAndAfterAll
@@ -6,7 +6,8 @@ import org.scalatest.freespec.AnyFreeSpec
 import org.scalatest.matchers.must.Matchers
 
 /**
- * @see [[https://github.com/zio/zio-quill/blob/bf18ce1add6d0ce0ad4109cdaba2a4bece47f48c/quill-sql/src/test/scala/io/getquill/context/sql/base/OnConflictSpec.scala]]
+ * @see
+ *   [[https://github.com/zio/zio-quill/blob/bf18ce1add6d0ce0ad4109cdaba2a4bece47f48c/quill-sql/src/test/scala/io/getquill/context/sql/base/OnConflictSpec.scala]]
  */
 trait OnConflictSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
   val ctx: SqlContext[_, _] with TestEntities

@@ -1,13 +1,16 @@
-package io.getquill.context.sql.base
+package io.getquill.context.sql.example
 
-import io.getquill.Query
+import io.getquill.{EntityQuery, Query, Quoted}
 import io.getquill.context.sql.SqlContext
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.freespec.AnyFreeSpec
 import org.scalatest.matchers.must.Matchers
 
+import scala.annotation.nowarn
+
 /**
- * @see [[https://github.com/zio/zio-quill/blob/bf18ce1add6d0ce0ad4109cdaba2a4bece47f48c/quill-sql/src/test/scala/io/getquill/context/sql/base/DepartmentsSpec.scala]]
+ * @see
+ *   [[https://github.com/zio/zio-quill/blob/bf18ce1add6d0ce0ad4109cdaba2a4bece47f48c/quill-sql/src/test/scala/io/getquill/context/sql/base/DepartmentsSpec.scala]]
  */
 trait DepartmentsSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
 
@@ -79,10 +82,10 @@ trait DepartmentsSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
                 for {
                   t <- query[Task] if (e.emp == t.emp && t.tsk == u)
                 } yield {}
-                ).isEmpty
-              )
+              ).isEmpty
+            )
           } yield {}).isEmpty
-          )
+        )
       } yield d.dpt
     }
 
@@ -90,15 +93,16 @@ trait DepartmentsSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
 
   val `Example 8 expected result` = List("Quality", "Research")
 
-  def any[T] =
+  def any[T]: Quoted[Query[T] => (T => Boolean) => Boolean] =
     quote { (xs: Query[T]) => (p: T => Boolean) =>
       (for {
-        x <- xs if (p(x))
+        x <- xs if p(x)
       } yield {}).nonEmpty
     }
 
+  @nowarn()
   val `Example 9 expertise` = {
-    val nestedOrg =
+    val nestedOrg: Quoted[EntityQuery[(String, EntityQuery[(String, EntityQuery[String])])]] =
       quote {
         for {
           d <- query[Department]
@@ -121,12 +125,12 @@ trait DepartmentsSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
         }
       }
 
-    def all[T] =
+    def all[T]: Quoted[Query[T] => (T => Boolean) => Boolean] =
       quote { (xs: Query[T]) => (p: T => Boolean) =>
         !any(xs)(x => !p(x))
       }
 
-    def contains[T] =
+    def contains[T]: Quoted[Query[T] => T => Boolean] =
       quote { (xs: Query[T]) => (u: T) =>
         any(xs)(x => x == u)
       }

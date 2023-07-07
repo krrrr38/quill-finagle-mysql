@@ -1,4 +1,4 @@
-package io.getquill.context.sql.base
+package io.getquill.context.sql.example
 
 import io.getquill.context.sql.{SqlContext, TestDecoders, TestEncoders}
 import org.scalatest.BeforeAndAfterAll
@@ -21,7 +21,8 @@ object Number {
 }
 
 /**
- * @see [[https://github.com/zio/zio-quill/blob/bf18ce1add6d0ce0ad4109cdaba2a4bece47f48c/quill-sql/src/test/scala/io/getquill/context/sql/EncodingSpec.scala]]
+ * @see
+ *   [[https://github.com/zio/zio-quill/blob/bf18ce1add6d0ce0ad4109cdaba2a4bece47f48c/quill-sql/src/test/scala/io/getquill/context/sql/EncodingSpec.scala]]
  */
 trait EncodingSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
 
@@ -30,30 +31,30 @@ trait EncodingSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
   import context._
 
   case class TimeEntity(
-                         sqlDate: java.sql.Date,                      // DATE
-                         sqlTime: java.sql.Time,                      // TIME
-                         sqlTimestamp: java.sql.Timestamp,            // DATETIME
-                         timeLocalDate: java.time.LocalDate,          // DATE
-                         timeLocalTime: java.time.LocalTime,          // TIME
-                         timeLocalDateTime: java.time.LocalDateTime,  // DATETIME
-                         timeZonedDateTime: java.time.ZonedDateTime,  // DATETIMEOFFSET
-                         timeInstant: java.time.Instant,              // DATETIMEOFFSET
-                         timeOffsetTime: java.time.OffsetTime,        // TIME
-                         timeOffsetDateTime: java.time.OffsetDateTime // DATETIMEOFFSET
-                       ) {
+    sqlDate: java.sql.Date,                      // DATE
+    sqlTime: java.sql.Time,                      // TIME
+    sqlTimestamp: java.sql.Timestamp,            // DATETIME
+    timeLocalDate: java.time.LocalDate,          // DATE
+    timeLocalTime: java.time.LocalTime,          // TIME
+    timeLocalDateTime: java.time.LocalDateTime,  // DATETIME
+    timeZonedDateTime: java.time.ZonedDateTime,  // DATETIMEOFFSET
+    timeInstant: java.time.Instant,              // DATETIMEOFFSET
+    timeOffsetTime: java.time.OffsetTime,        // TIME
+    timeOffsetDateTime: java.time.OffsetDateTime // DATETIMEOFFSET
+  ) {
     override def equals(other: Any): Boolean =
       other match {
         case t: TimeEntity =>
           this.sqlDate == t.sqlDate &&
-            this.sqlTime == t.sqlTime &&
-            this.sqlTimestamp == t.sqlTimestamp &&
-            this.timeLocalDate == t.timeLocalDate &&
-            this.timeLocalTime == t.timeLocalTime &&
-            this.timeLocalDateTime == t.timeLocalDateTime &&
-            this.timeZonedDateTime.isEqual(t.timeZonedDateTime) &&
-            this.timeInstant == t.timeInstant &&
-            this.timeOffsetTime.isEqual(t.timeOffsetTime) &&
-            this.timeOffsetDateTime.isEqual(t.timeOffsetDateTime)
+          this.sqlTime == t.sqlTime &&
+          this.sqlTimestamp == t.sqlTimestamp &&
+          this.timeLocalDate == t.timeLocalDate &&
+          this.timeLocalTime == t.timeLocalTime &&
+          this.timeLocalDateTime == t.timeLocalDateTime &&
+          this.timeZonedDateTime.isEqual(t.timeZonedDateTime) &&
+          this.timeInstant == t.timeInstant &&
+          this.timeOffsetTime.isEqual(t.timeOffsetTime) &&
+          this.timeOffsetDateTime.isEqual(t.timeOffsetDateTime)
         case _ => false
       }
   }
@@ -89,36 +90,36 @@ trait EncodingSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
   }
 
   case class EncodingTestEntity(
-                                 v1: String,
-                                 v2: BigDecimal,
-                                 v3: Boolean,
-                                 v4: Byte,
-                                 v5: Short,
-                                 v6: Int,
-                                 v7: Long,
-                                 v8: Float,
-                                 v9: Double,
-                                 v10: Array[Byte],
-                                 v11: Date,
-                                 v12: EncodingTestType,
-                                 v13: LocalDate,
-                                 v14: UUID,
-                                 o1: Option[String],
-                                 o2: Option[BigDecimal],
-                                 o3: Option[Boolean],
-                                 o4: Option[Byte],
-                                 o5: Option[Short],
-                                 o6: Option[Int],
-                                 o7: Option[Long],
-                                 o8: Option[Float],
-                                 o9: Option[Double],
-                                 o10: Option[Array[Byte]],
-                                 o11: Option[Date],
-                                 o12: Option[EncodingTestType],
-                                 o13: Option[LocalDate],
-                                 o14: Option[UUID],
-                                 o15: Option[Number]
-                               )
+    v1: String,
+    v2: BigDecimal,
+    v3: Boolean,
+    v4: Byte,
+    v5: Short,
+    v6: Int,
+    v7: Long,
+    v8: Float,
+    v9: Double,
+    v10: Array[Byte],
+    v11: Date,
+    v12: EncodingTestType,
+    v13: LocalDate,
+    v14: UUID,
+    o1: Option[String],
+    o2: Option[BigDecimal],
+    o3: Option[Boolean],
+    o4: Option[Byte],
+    o5: Option[Short],
+    o6: Option[Int],
+    o7: Option[Long],
+    o8: Option[Float],
+    o9: Option[Double],
+    o10: Option[Array[Byte]],
+    o11: Option[Date],
+    o12: Option[EncodingTestType],
+    o13: Option[LocalDate],
+    o14: Option[UUID],
+    o15: Option[Number]
+  )
 
   val delete = quote {
     query[EncodingTestEntity].delete

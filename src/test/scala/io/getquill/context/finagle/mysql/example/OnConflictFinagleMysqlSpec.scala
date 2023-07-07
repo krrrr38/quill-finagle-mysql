@@ -1,13 +1,14 @@
-package io.getquill.context.finagle.mysql
+package io.getquill.context.finagle.mysql.example
 
 import com.twitter.util.{Await, Future}
-import io.getquill.context.sql.base.OnConflictSpec
+import io.getquill.context.finagle.mysql.testContext
+import io.getquill.context.sql.example.OnConflictSpec
 
-class OnConflictFinagleSpec extends OnConflictSpec {
+class OnConflictFinagleMysqlSpec extends OnConflictSpec {
   val ctx = testContext
   import ctx._
 
-  def await[T](future: Future[T]) = Await.result(future)
+  def await[T](future: Future[T]): T = Await.result(future)
 
   override protected def beforeAll(): Unit = {
     await(ctx.run(qr1.delete))

@@ -1,9 +1,10 @@
-package io.getquill.context.sql.base
+package io.getquill.context.sql.example
 
 import io.getquill.Ord
 
 /**
- * @see [[https://github.com/zio/zio-quill/blob/bf18ce1add6d0ce0ad4109cdaba2a4bece47f48c/quill-sql/src/test/scala/io/getquill/context/sql/base/QueryResultTypeSpec.scala]]
+ * @see
+ *   [[https://github.com/zio/zio-quill/blob/bf18ce1add6d0ce0ad4109cdaba2a4bece47f48c/quill-sql/src/test/scala/io/getquill/context/sql/base/QueryResultTypeSpec.scala]]
  */
 trait QueryResultTypeSpec extends ProductSpec {
 

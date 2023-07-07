@@ -1,17 +1,17 @@
-package io.getquill.context.finagle.mysql
+package io.getquill.context.finagle.mysql.example
 
-import com.twitter.util.Await
-import com.twitter.util.Future
-import io.getquill.context.sql.base.PeopleSpec
+import com.twitter.util.{Await, Future}
+import io.getquill.context.finagle.mysql.testContext
+import io.getquill.context.sql.example.PeopleSpec
 
 class PeopleFinagleMysqlSpec extends PeopleSpec {
 
   val context = testContext
   import testContext._
 
-  def await[T](future: Future[T]) = Await.result(future)
+  def await[T](future: Future[T]): T = Await.result(future)
 
-  override def beforeAll =
+  override def beforeAll(): Unit =
     await {
       testContext.transaction {
         for {

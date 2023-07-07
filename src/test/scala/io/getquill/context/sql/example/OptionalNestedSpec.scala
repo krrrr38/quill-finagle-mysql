@@ -1,4 +1,4 @@
-package io.getquill.context.sql.base
+package io.getquill.context.sql.example
 
 import io.getquill.Insert
 import io.getquill.context.Context

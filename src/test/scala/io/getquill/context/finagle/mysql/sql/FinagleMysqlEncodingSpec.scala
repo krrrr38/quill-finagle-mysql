@@ -1,14 +1,13 @@
-package io.getquill.context.finagle.mysql
+package io.getquill.context.finagle.mysql.sql
+
+import com.twitter.util.Await
+import io.getquill.context.finagle.mysql.testContext
+import io.getquill.context.test.sql.EncodingSpec
+import io.getquill.util.LoadConfig
+import io.getquill.{FinagleMysqlContext, FinagleMysqlContextConfig, Literal, Query}
 
 import java.time.{LocalDate, LocalDateTime, ZoneId}
 import java.util.{Date, TimeZone}
-
-import com.twitter.util.Await
-import io.getquill.util.LoadConfig
-import io.getquill.{FinagleMysqlContext, FinagleMysqlContextConfig, Literal}
-import io.getquill.Query
-import io.getquill.context.sql.example.EncodingSpec
-
 import scala.concurrent.duration._
 
 class FinagleMysqlEncodingSpec extends EncodingSpec {

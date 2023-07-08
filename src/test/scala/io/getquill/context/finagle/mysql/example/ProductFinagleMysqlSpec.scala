@@ -2,7 +2,7 @@ package io.getquill.context.finagle.mysql.example
 
 import com.twitter.util.{Await, Future}
 import io.getquill.context.finagle.mysql.testContext
-import io.getquill.context.sql.example.{Id, ProductSpec}
+import io.getquill.context.test.example.{Id, ProductSpec}
 
 class ProductFinagleMysqlSpec extends ProductSpec {
 
@@ -18,8 +18,9 @@ class ProductFinagleMysqlSpec extends ProductSpec {
 
   "Product" - {
     "Insert multiple products" in {
-      val inserted = await(Future.collect(productEntries.map(product => testContext.run(productInsert(lift(product))))))
-      val product  = await(testContext.run(productById(lift(inserted(2))))).head
+      val inserted =
+        await(Future.collect(productEntries.map(product => testContext.run(productInsertReturningId(lift(product))))))
+      val product = await(testContext.run(productById(lift(inserted(2))))).head
       product.description mustEqual productEntries(2).description
       product.id mustEqual inserted(2)
     }
@@ -57,7 +58,7 @@ class ProductFinagleMysqlSpec extends ProductSpec {
 
     "Single product insert with a method quotation" in {
       val prd             = Product(0L, "test3", 3L)
-      val inserted        = await(testContext.run(productInsert(lift(prd))))
+      val inserted        = await(testContext.run(productInsertReturningId(lift(prd))))
       val returnedProduct = await(testContext.run(productById(lift(inserted)))).head
       returnedProduct.description mustEqual "test3"
       returnedProduct.sku mustEqual 3L

@@ -1,4 +1,4 @@
-package io.getquill.context.sql.example
+package io.getquill.context.test.example
 
 import io.getquill.context.sql.SqlContext
 import org.scalatest.BeforeAndAfterAll

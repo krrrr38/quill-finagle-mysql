@@ -1,7 +1,7 @@
-package io.getquill.context.sql
+package io.getquill.context.test
 
 import io.getquill.MappedEncoding
-import io.getquill.context.sql.example.{EncodingTestType, Number}
+import io.getquill.context.test.sql.EncodingTestType
 
 /**
  * @see
@@ -10,5 +10,5 @@ import io.getquill.context.sql.example.{EncodingTestType, Number}
 trait TestEncoders {
   implicit val encodingTestTypeEncoder: MappedEncoding[EncodingTestType, String] =
     MappedEncoding[EncodingTestType, String](_.value)
-  implicit val nameEncoder: MappedEncoding[Number, String] = MappedEncoding[Number, String](_.value)
+  implicit val nameEncoder: MappedEncoding[sql.Number, String] = MappedEncoding[sql.Number, String](_.value)
 }

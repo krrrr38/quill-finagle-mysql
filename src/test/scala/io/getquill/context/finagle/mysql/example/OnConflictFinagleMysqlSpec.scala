@@ -2,7 +2,7 @@ package io.getquill.context.finagle.mysql.example
 
 import com.twitter.util.{Await, Future}
 import io.getquill.context.finagle.mysql.testContext
-import io.getquill.context.sql.example.OnConflictSpec
+import io.getquill.context.test.example.OnConflictSpec
 
 class OnConflictFinagleMysqlSpec extends OnConflictSpec {
   val ctx = testContext

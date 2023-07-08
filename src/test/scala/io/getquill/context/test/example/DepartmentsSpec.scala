@@ -1,4 +1,4 @@
-package io.getquill.context.sql.example
+package io.getquill.context.test.example
 
 import io.getquill.{EntityQuery, Query, Quoted}
 import io.getquill.context.sql.SqlContext

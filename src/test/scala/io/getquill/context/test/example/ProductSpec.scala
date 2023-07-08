@@ -1,4 +1,4 @@
-package io.getquill.context.sql.example
+package io.getquill.context.test.example
 
 import io.getquill.Query
 import io.getquill.context.sql.SqlContext
@@ -25,21 +25,25 @@ trait ProductSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
   }
 
   val productInsert = quote { (p: Product) =>
+    query[Product].insertValue(p)
+  }
+
+  val productInsertReturningId = quote { (p: Product) =>
     query[Product].insertValue(p).returningGenerated(_.id)
   }
 
   val productInsertBatch = quote { (b: Query[Product]) =>
-    b.foreach(p => productInsert.apply(p))
+    b.foreach(p => productInsertReturningId.apply(p))
   }
 
-  def productById = quote { (id: Long) =>
+  val productById = quote { (id: Long) =>
     product.filter(_.id == id)
   }
 
   val productEntries = List(
     Product(0L, "Notebook", 1001L),
-    Product(0L, "Soap", 1002L),
-    Product(0L, "Pencil", 1003L)
+    Product(1L, "Soap", 1002L),
+    Product(2L, "Pencil", 1003L)
   )
 
   val productSingleInsert = quote {

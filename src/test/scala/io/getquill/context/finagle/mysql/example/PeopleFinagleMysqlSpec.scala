@@ -2,7 +2,7 @@ package io.getquill.context.finagle.mysql.example
 
 import com.twitter.util.{Await, Future}
 import io.getquill.context.finagle.mysql.testContext
-import io.getquill.context.sql.example.PeopleSpec
+import io.getquill.context.test.example.PeopleSpec
 
 class PeopleFinagleMysqlSpec extends PeopleSpec {
 

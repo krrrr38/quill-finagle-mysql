@@ -1,4 +1,4 @@
-package io.getquill.context.sql
+package io.getquill.context.test
 
 import io.getquill.context.Context
 import io.getquill.quat.Quat

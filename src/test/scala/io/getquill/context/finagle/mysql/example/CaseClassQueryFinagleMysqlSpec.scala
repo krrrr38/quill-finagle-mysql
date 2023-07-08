@@ -2,7 +2,7 @@ package io.getquill.context.finagle.mysql.example
 
 import com.twitter.util.{Await, Future}
 import io.getquill.context.finagle.mysql.testContext
-import io.getquill.context.sql.example.CaseClassQuerySpec
+import io.getquill.context.test.example.CaseClassQuerySpec
 import org.scalatest.matchers.should.Matchers._
 
 class CaseClassQueryFinagleMysqlSpec extends CaseClassQuerySpec {

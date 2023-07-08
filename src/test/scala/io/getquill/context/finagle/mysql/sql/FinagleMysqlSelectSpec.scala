@@ -1,13 +1,13 @@
-package io.getquill.context.finagle.mysql.example
+package io.getquill.context.finagle.mysql.sql
 
 import com.twitter.util.{Await, Future}
 import io.getquill.context.finagle.mysql.testContext
-import io.getquill.context.sql.example.QueryResultTypeSpec
+import io.getquill.context.test.sql.QuerySpec
 
 import java.util.concurrent.ConcurrentLinkedQueue
 import scala.jdk.CollectionConverters._
 
-class QueryResultTypeFinagleMysqlSpec extends QueryResultTypeSpec {
+class FinagleMysqlSelectSpec extends QuerySpec {
 
   val context = testContext
   import testContext._
@@ -18,7 +18,7 @@ class QueryResultTypeFinagleMysqlSpec extends QueryResultTypeSpec {
 
   override def beforeAll(): Unit = {
     await(testContext.run(deleteAll))
-    val rs = await(testContext.run(liftQuery(productEntries).foreach(e => productInsert(e))))
+    val rs = await(testContext.run(liftQuery(productEntries).foreach(e => productInsertReturningId(e))))
     val inserted = (rs zip productEntries).map { case (r, prod) =>
       prod.copy(id = r)
     }

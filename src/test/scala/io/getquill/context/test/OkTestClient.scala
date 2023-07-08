@@ -1,4 +1,4 @@
-package io.getquill.context.sql
+package io.getquill.context.test
 
 import com.twitter.concurrent.AsyncStream
 import com.twitter.finagle.mysql

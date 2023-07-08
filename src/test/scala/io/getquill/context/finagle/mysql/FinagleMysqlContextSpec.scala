@@ -4,9 +4,9 @@ import java.util.TimeZone
 import com.twitter.finagle.mysql
 import com.twitter.finagle.mysql.{EmptyValue, Error, IsolationLevel}
 import com.twitter.util._
-import io.getquill.context.sql.{OkTestClient, TestDecoders, TestEncoders, TestEntities}
 import io.getquill.FinagleMysqlContext
 import io.getquill.Literal
+import io.getquill.context.test.{OkTestClient, TestDecoders, TestEncoders, TestEntities}
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.freespec.AnyFreeSpec
 import org.scalatest.matchers.must.Matchers
@@ -16,7 +16,7 @@ class FinagleMysqlContextSpec extends AnyFreeSpec with Matchers with BeforeAndAf
   val context = testContext
   import testContext._
 
-  def await[T](f: Future[T]) = Await.result(f)
+  def await[T](f: Future[T]): T = Await.result(f)
 
   "run non-batched action" in {
     val insert = quote { (i: Int) =>
@@ -93,7 +93,7 @@ class FinagleMysqlContextSpec extends AnyFreeSpec with Matchers with BeforeAndAf
       override def toOk(result: mysql.Result) = super.toOk(result)
     }
     intercept[IllegalStateException](ctx.toOk(Error(-1, "no ok", "test")))
-    ctx.close
+    ctx.close()
   }
 
   "prepare" in {

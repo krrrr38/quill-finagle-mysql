@@ -1,6 +1,7 @@
-package io.getquill.context.sql.example
+package io.getquill.context.test.example
 
-import io.getquill.context.sql.{SqlContext, TestEntities}
+import io.getquill.context.sql.SqlContext
+import io.getquill.context.test.TestEntities
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.freespec.AnyFreeSpec
 import org.scalatest.matchers.must.Matchers

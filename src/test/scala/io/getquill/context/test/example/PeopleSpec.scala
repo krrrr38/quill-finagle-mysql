@@ -1,4 +1,4 @@
-package io.getquill.context.sql.example
+package io.getquill.context.test.example
 
 import io.getquill.context.sql.SqlContext
 import io.getquill.{Ord, Query, Quoted}
@@ -162,8 +162,8 @@ trait PeopleSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
   }
   val `Ex 11 filtered update expected` =
     peopleEntries.map {
-      case Person("Bert", age) => Person("Bert", 44)
-      case other               => other
+      case Person("Bert", _) => Person("Bert", 44)
+      case other             => other
     }
 
   val `Ex 12 filtered update co-related` = quote {
@@ -176,7 +176,7 @@ trait PeopleSpec extends AnyFreeSpec with Matchers with BeforeAndAfterAll {
   }
   val `Ex 12 filtered update co-related expected` =
     peopleEntries.map {
-      case Person("Bert", age) => Person("Bert", 45)
-      case other               => other
+      case Person("Bert", _) => Person("Bert", 45)
+      case other             => other
     }
 }

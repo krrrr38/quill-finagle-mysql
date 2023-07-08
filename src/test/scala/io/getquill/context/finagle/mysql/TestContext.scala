@@ -1,7 +1,7 @@
 package io.getquill.context.finagle.mysql
 
 import io.getquill.{FinagleMysqlContext, Literal}
-import io.getquill.context.sql.{TestDecoders, TestEncoders, TestEntities}
+import io.getquill.context.test.{TestDecoders, TestEncoders, TestEntities}
 
 object testContext
     extends FinagleMysqlContext(

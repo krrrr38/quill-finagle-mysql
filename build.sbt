@@ -1,4 +1,4 @@
-val scala2Version = "2.13.11"
+val scala2Version = "2.13.12"
 
 addCommandAlias("fmt", "all scalafmtSbt scalafmt test:scalafmt")
 addCommandAlias(

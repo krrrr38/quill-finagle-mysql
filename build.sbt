@@ -30,7 +30,7 @@ lazy val root = project
     libraryDependencies ++= Seq(
       "io.getquill"   %% "quill-sql"       % "4.6.1",
       "com.twitter"   %% "finagle-mysql"   % "22.12.0",
-      "org.scalatest" %% "scalatest"       % "3.2.16" % Test,
+      "org.scalatest" %% "scalatest"       % "3.2.17" % Test,
       "ch.qos.logback" % "logback-classic" % "1.4.11" % Test
     ),
     scalacOptions ++= Seq(

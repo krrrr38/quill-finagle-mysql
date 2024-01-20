@@ -1,6 +1,9 @@
 scala:
-- build.sbt
-- src/**/*
-- project/**/*
+- changed-files:
+  - any-glob-to-any-file:
+    - build.sbt
+    - src/**/*
+    - project/**/*
 ci:
-- .github/**/*
+- changed-files:
+  - any-glob-to-any-file: .github/**/*

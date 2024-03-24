@@ -31,7 +31,7 @@ lazy val root = project
       "io.getquill"   %% "quill-sql"       % "4.8.3",
       "com.twitter"   %% "finagle-mysql"   % "23.11.0",
       "org.scalatest" %% "scalatest"       % "3.2.18" % Test,
-      "ch.qos.logback" % "logback-classic" % "1.5.3" % Test
+      "ch.qos.logback" % "logback-classic" % "1.5.3"  % Test
     ),
     scalacOptions ++= Seq(
       "-encoding",

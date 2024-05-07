@@ -28,7 +28,7 @@ lazy val root = project
     ),
     scalaVersion := scala2Version,
     libraryDependencies ++= Seq(
-      "io.getquill"   %% "quill-sql"       % "4.8.3",
+      "io.getquill"   %% "quill-sql"       % "4.8.4",
       "com.twitter"   %% "finagle-mysql"   % "24.2.0",
       "org.scalatest" %% "scalatest"       % "3.2.18" % Test,
       "ch.qos.logback" % "logback-classic" % "1.5.6"  % Test
